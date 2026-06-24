@@ -115,16 +115,18 @@ def validate(promt: str, type: str = "str"):
 
     
 def main():
+    order_manager =OrderManager()
     while True:
+
         menu()
         choice = input("Nhập lựa chọn của bạn:")
         match choice:
             case "1":
-                OrderManager.show_all()
+                order_manager.show_all()
             case "2":
-                OrderManager.add_order()
+                order_manager.add_order()
             case "3":
-                OrderManager.update_order()
+                order_manager.update_order()
             case "6":
                 print("Đã thoát !!")
                 break
