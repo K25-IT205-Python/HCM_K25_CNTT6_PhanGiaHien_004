@@ -31,7 +31,17 @@ class OrderManager():
 
     
     def add_order(self):
-       while True:
+       print()
+
+    def show_all(self, orders = None):
+        print(f"{'Mã đơn hàng':<11} | {'Tên khách hàng':<20} | {'Tên sản phẩm':<20} | {'Đơn giá':<10} | {'Phí vận chuyển':<15} | {'Voucher':<10} | {'Tổng tiền':<20} | {'Phân loại':<10}")
+        for order in orders:
+            print(f"{order.id:<11} | {order.customer_name:<20} | {order.product_name:<20} | {order.unit_price:<10} | {order.shipping_fee:<15} | {order.voucher:<10} | {order.total_amount:<20} | {order.order_type:<10}")
+
+    def update_order(self):
+        while True:
+           if not self.orders:
+               print("Danh sách rỗng !")
            id_input = validate("Nhập id: ")
            for order in Order:
                 if order.lower() == Order.id.lower():
@@ -51,15 +61,10 @@ class OrderManager():
                 Order.quantity = input_quantity
                 Order.shipping_fee = input_shipping_fee
                 Order.voucher = input_voucher   
+                Order.calculate_total_amount()
+                Order.classify_order()
 
                 print("Cập nhật thành công !")
-
-    def show_all(self):
-        print(f"{'Mã đơn hàng':<11} | {'Tên khách hàng':<20} | {'Tên sản phẩm':<20} | {'Đơn giá':<10} | {'Phí vận chuyển':<15} | {'Voucher':<10} | {'Tổng tiền':<20} | {'Phân loại':<10}")
-        for self.order in Order:
-            print(f"{Order.id:<11} | {Order.customer_name:<20} | {Order.product_name:<20} | {Order.unit_price:<10} | {Order.shipping_fee:<15} | {Order.voucher:<10} | {Order.total_amount:<20} | {Order.order_type:<10}")
-    def update_order():
-        print()
     def delete_order():
         print()
     def search_order():
@@ -118,6 +123,8 @@ def main():
                 OrderManager.show_all()
             case "2":
                 OrderManager.add_order()
+            case "3":
+                OrderManager.update_order()
             case "6":
                 print("Đã thoát !!")
                 break
